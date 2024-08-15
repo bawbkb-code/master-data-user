@@ -40,16 +40,16 @@ export class FilterComponent{
       sort: this.paginationConfig.sort
     }, this.model);
 
-    // this.apiService.post("User/filter", filterModel).subscribe(
-    //   (response: any) => {
-    //     this.searchResult = response.data;
-    //     this.paginationConfig.totalItems = response.totalItems;
-    //     this.searchService.setResult = this.searchResult;
-    //   },
-    //   (err: any) => {
-    //     console.log(err);
-    //   }
-    // );
+    this.apiService.post("User/filter", filterModel).subscribe(
+      (response: any) => {
+        this.searchResult = response;
+        this.paginationConfig.totalItems = response.totalItems;
+        this.searchService.setResult = this.searchResult;
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
   }
 
   swapSearchView(): void {

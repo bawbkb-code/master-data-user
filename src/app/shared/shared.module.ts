@@ -1,24 +1,25 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { RouterModule } from "@angular/router";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { CalendarModule } from "primeng/calendar";
-import { HttpClientModule } from "@angular/common/http";
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CalendarModule } from 'primeng/calendar';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
+import { FieldErrorDisplayComponent, ValidationMessageComponent } from './components';
 
 @NgModule({
-  declarations: [
-  ],
+  declarations: [FieldErrorDisplayComponent],
+  exports: [FieldErrorDisplayComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
-    HttpClientModule,
     CommonModule,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
     CalendarModule,
   ],
-  providers: [
-  ],
-  exports: [],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  providers: [provideHttpClient(withInterceptorsFromDi())],
 })
-export class SharedModule { }
+export class SharedModule {}

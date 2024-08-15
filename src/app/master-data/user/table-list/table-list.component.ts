@@ -12,6 +12,7 @@ import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { TableLazyLoadEvent } from 'primeng/table';
 
 @Component({
   selector: 'app-table-list',
@@ -30,20 +31,16 @@ export class TableListComponent implements OnInit, AfterViewInit {
       name: 'Operation',
     },
     {
-      field: 'hn',
-      name: 'HN เจ้าของ',
-    },
-    {
       field: 'fullName',
-      name: 'ชื่อเจ้าของ',
+      name: 'Name',
     },
     {
       field: 'phone',
-      name: 'เบอร์ติดต่อ',
+      name: 'Phone',
     },
     {
       field: 'email',
-      name: '',
+      name: 'Email',
     },
   ];
 
@@ -53,7 +50,6 @@ export class TableListComponent implements OnInit, AfterViewInit {
     private searchService: SearchService
   ) {
   }
-
 
   ngOnDestroy(): void {
     this.unsubscribe$.next();
@@ -66,31 +62,18 @@ export class TableListComponent implements OnInit, AfterViewInit {
       takeUntil(this.unsubscribe$)
     ).subscribe((data: any) => {
       this.paginationConfig = data;
-      console.log(this.paginationConfig)
     });
 
     this.searchService.result.pipe(
       takeUntil(this.unsubscribe$)
     ).subscribe((data: any) => {
       this.searchResult = data;
-        this.loading = false;
+      this.loading = false;
     });
   }
 
   ngAfterViewInit(): void {
     this.cd.detectChanges();
-  }
-
-  canEdit(item: any): boolean {
-    return item.requestStatus !== 'Completed';
-  }
-
-  canView(item: any): boolean {
-    return item.requestStatus === 'Completed';
-  }
-
-  canDelete(item: any): boolean {
-    return item.requestStatus === 'Pending';
   }
 
   confirmBox(item: any): void {
@@ -131,7 +114,7 @@ export class TableListComponent implements OnInit, AfterViewInit {
       );
   }
 
-  search(event: LazyLoadEvent): void {
+  search(event: TableLazyLoadEvent): void {
     this.loading = true;
     this.paginationConfig.sort = event.multiSortMeta;
     this.searchService.search();

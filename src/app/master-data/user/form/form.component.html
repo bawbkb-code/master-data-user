@@ -1,1 +1,90 @@
-<p>form works!</p>
+<div class="container vh-100 w-100 justify-content-center align-items-center d-flex">
+  <div class="text-center align-self-center shadow p-4 bg-white" style="width: 400px;"> <!-- Adjust the width here -->
+    <div class="row" *ngIf="!this.id"><h3>Create User</h3></div>
+    <div class="row" *ngIf="this.id"><h3>Edit User</h3></div>
+    <form [formGroup]="form" novalidate>
+      <div class="mt-3 row ">
+        <div class="col">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input
+              id="firstName"
+              type="text"
+              class="form-control"
+              formControlName="firstName"
+              [(ngModel)]="model.firstName"
+            />
+            <app-field-error-display
+              [controlError]="getTouchControl('firstName')"
+              requiredMsg="*This is a required field."
+            ></app-field-error-display>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-3 row">
+        <div class="col">
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input
+              id="lastName"
+              type="text"
+              class="form-control"
+              formControlName="lastName"
+              [(ngModel)]="model.lastName"
+            />
+            <app-field-error-display
+              [controlError]="getTouchControl('lastName')"
+              requiredMsg="*This is a required field."
+            ></app-field-error-display>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-3 row">
+        <div class="col">
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input
+              id="phone"
+              type="text"
+              class="form-control"
+              formControlName="phone"
+              [(ngModel)]="model.phone"
+            />
+            <app-field-error-display
+              [controlError]="getTouchControl('phone')"
+              requiredMsg="*This is a required field."
+            ></app-field-error-display>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-3 row">
+        <div class="col">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              id="email"
+              type="text"
+              class="form-control"
+              formControlName="email"
+              [(ngModel)]="model.email"
+            />
+            <app-field-error-display
+              [controlError]="getTouchControl('email')"
+              requiredMsg="*This is a required field."
+            ></app-field-error-display>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-3 d-flex justify-content-evenly">
+        <a class="btn btn-primary" (click)="save()">Save</a>
+        <a class="btn btn-info" (click)="back()">Back</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+{{validateAllForm()}}

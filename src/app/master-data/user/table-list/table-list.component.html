@@ -1,10 +1,9 @@
-<div class="card-body table-responsive mt-4">
+<div class="card-body table-responsive mt-4 shadow">
   <p-table
-    [value]="searchResult"
-    class="table"
-    [lazy]="true"
-    responsiveLayout="scroll"
-    [loading]="loading"
+  [value]="searchResult"
+  [lazy]="true"
+  [loading]="loading"
+  (onLazyLoad)="search($event)"
   >
     <ng-template pTemplate="header">
       <tr>
@@ -22,36 +21,24 @@
           <td *ngSwitchCase="'Operation'" class="text-center">
             <a
               class="btn btn-info me-2"
-              [routerLink]="['./', item.id]"
-              *ngIf="canView(item)"
-              ><i class="fa fa-eye" aria-hidden="true"></i
-            ></a>
+              [routerLink]="['./edit', item.id]"
+              ><i class="pi pi-search"></i></a>
           </td>
-          <td *ngSwitchDefault>{{ item[column.field] }}</td>
+          <td  class="text-center" *ngSwitchDefault>{{ item[column.field] }}</td>
         </ng-container>
       </tr>
     </ng-template>
   </p-table>
 </div>
 
-<div class="row">
-  <div class="d-flex flex-row-reverse bd-highlight">
-    <div class="p-2 bd-highlight">
-      
-      <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-end">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">Previous</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-          </li>
-        </ul>
-      </nav>
-
+<div class="row mt-4">
+  <div class="d-flex flex-row-reverse bd-highlight ">
+    <div class="p-2 bd-highlight ">
+      <p-paginator
+            [rows]="paginationConfig.itemsPerPage"
+            [totalRecords]="paginationConfig.totalItems"
+            (onPageChange)="pageChange($event)"
+          ></p-paginator>
     </div>
     <div class="p-1 bd-highlight">
       <select

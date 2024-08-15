@@ -1,0 +1,7 @@
+<div *ngIf="showError" class="alert alert-danger" role="alert">
+    <div *ngIf="control?.errors?.['required']">
+      {{ fieldName }} is required
+    </div>
+    <!-- Add more error messages here as needed -->
+  </div>
+  
