@@ -1,0 +1,62 @@
+<div class="container row g-2 mt-4" *ngIf="!model.isAdvanceSearch">
+    <div class="col-12 col-lg-4 d-flex justify-content-center mb-2">
+      <input class="form-control" placeholder="Name/Email" [(ngModel)]="model.searchKey" />
+    </div>
+    <div class="row g-2">
+        <div class="col-12 col-lg-12 d-flex justify-content-center mb-2">
+            <a class="btn btn-primary" (click)="searchClick()">
+            <i class="fa fa-search" aria-hidden="true"></i>&nbsp;Search
+            </a>
+        </div>
+        <div class="col-12 d-flex justify-content-end">
+          <a class="btn btn-primary" [routerLink]="['new']">
+            <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add User
+          </a>
+        </div>
+      </div>
+  </div>
+   
+
+  <div class="text-center mt-2" *ngIf="!model.isAdvanceSearch">
+    <a class="btn btn-primary" (click)="swapSearchView()">{{txtSearchMore}}</a>
+  </div>
+
+
+    <div class="container mt-4" *ngIf="model.isAdvanceSearch">
+      <div class="row g-2 mb-2">
+        <div class="col-12 col-md-1 text-md-end">HN เจ้าของ</div>
+        <div class="col-12 col-md-3">
+          <input type="text" placeholder="HN เจ้าของ" class="form-control" [(ngModel)]="model.hn">
+        </div>
+        <div class="col-12 col-md-1 text-md-end">ชื่อ</div>
+        <div class="col-12 col-md-3">
+        <input type="text" placeholder="ชื่อ" class="form-control" [(ngModel)]="model.firstName">
+        </div>
+        <div class="col-12 col-md-1 text-md-end">นามสกุล</div>
+        <div class="col-12 col-md-3">
+        <input type="text" placeholder="นามสกุล" class="form-control" [(ngModel)]="model.lastName">
+        </div>
+      </div>
+      <div class="row g-2 mb-2">
+        <div class="col-12 col-md-1 text-md-end">เบอร์ติดต่อ</div>
+        <div class="col-12 col-md-3">
+          <input type="text" placeholder="เบอร์ติดต่อ" class="form-control" [(ngModel)]="model.phone">
+        </div>
+        <div class="col-12 col-md-1 text-md-end">Email</div>
+        <div class="col-12 col-md-3">
+        <input type="text" placeholder="Email" class="form-control" [(ngModel)]="model.email">
+        </div>
+      </div>
+      <div class="row g-2 mb-4 text-center">
+        <div class="col-12">
+          <a class="btn btn-primary" (click)="searchClick()">
+            <i class="fa fa-search" aria-hidden="true"></i>&nbsp;Search
+          </a>
+        </div>
+      </div>
+      <div class="row g-2 mt-4 text-center">
+        <div class="col-12">
+          <a class="btn btn-primary" (click)="swapSearchView()">{{txtSearchMore}}</a>
+        </div>
+      </div>
+    </div>

@@ -1,0 +1,52 @@
+<div class="card-body table-responsive mt-4">
+    <p-table [value]="searchResult" class="table" [lazy]="true" responsiveLayout="scroll" [loading]="loading"
+       >
+        <ng-template pTemplate="header">
+            <tr>
+                <ng-container *ngFor="let column of columns; let i = index">
+                    <th class="text-center">{{column.name}}</th>
+                </ng-container>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
+            <tr>
+                <ng-container *ngFor="let column of columns; let i = index" [ngSwitch]="column.name">
+                    <td *ngSwitchCase="'Operation'" class="text-center">
+                        <a class="btn btn-info me-2" [routerLink]="['./', item.id]" *ngIf="canView(item)"><i class="fa fa-eye"
+                            aria-hidden="true"></i></a>
+                    </td>
+                    <td *ngSwitchDefault>{{item[column.field]}}</td>
+                </ng-container>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+
+<div class="row">
+    <div class="d-flex flex-row-reverse bd-highlight">
+      <div class="p-2 bd-highlight">
+        <p-paginator
+          [rows]="paginationConfig.itemsPerPage"
+          [totalRecords]="paginationConfig.totalItems"
+          (onPageChange)="pageChange($event)"
+        ></p-paginator>
+      </div>
+      <div class="p-1 bd-highlight">
+        <select
+          [(ngModel)]="paginationConfig.itemsPerPage"
+          class="form-select mt-3"
+          (change)="itemPerPageChange()"
+          >
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </div>
+      <div class="p-2 bd-highlight">
+        <label class="mt-3">Item Per Page</label>
+      </div>
+    </div>
+  </div>
