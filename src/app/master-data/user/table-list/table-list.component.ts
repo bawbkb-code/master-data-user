@@ -12,7 +12,6 @@ import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-table-list',
@@ -67,6 +66,7 @@ export class TableListComponent implements OnInit, AfterViewInit {
       takeUntil(this.unsubscribe$)
     ).subscribe((data: any) => {
       this.paginationConfig = data;
+      console.log(this.paginationConfig)
     });
 
     this.searchService.result.pipe(
